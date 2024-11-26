@@ -7,10 +7,10 @@ html_calc_triangulo = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculador de Área de Triángulos</title>
+    <title>Calculador de Área de Triángulos de GP</title>
 </head>
 <body>
-    <h1>Calculador de Área de Triángulos</h1>
+    <h1>Calculador de Área de Triángulos de GP</h1>
 
     <form action="/calcular_area" method="POST"> <label for="base">Base:</label>
         <input type="number" id="base" name="base" required>
@@ -42,10 +42,10 @@ def area_triangulo(base, altura):
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Calculador de Área de Triángulos</title>
+        <title>Calculador de Área de Triángulos de GP</title>
     </head>
     <body>
-        <h1>Calculador de Área de Triángulos</h1>
+        <h1>Calculador de Área de Triángulos de GP</h1>
 
         <h3>El área de un triángulo de base {base} y altura {altura} es: {resultado}</h3>
     </body>
@@ -67,10 +67,11 @@ class GSLPVRequestHandler(BaseHTTPRequestHandler):
         4. Escribe el contenido HTML en el cuerpo de la respuesta.
         '''
         self.send_response(200)
-        self.send_header('Content-type', 'text/html')
+          # los headers hacen referencia a los encabezados de html. si no se pone text/html se enviará un texto plano.
+        self.send_header('Content-type', 'text/html') 
         self.end_headers()
         self.wfile.write(bytes(html_calc_triangulo, 'utf-8'))
-
+        # UTF-8 es un formato de codificación de caracteres Unicode. Es el responsable de que tu navegador muestre el contenido del texto correctamente decodificado, sin errores ni caracteres extraños.
     def do_POST(self):
         '''
         Esta función procesa las solicitudes de tipo POST.
@@ -84,14 +85,14 @@ class GSLPVRequestHandler(BaseHTTPRequestHandler):
         '''
         content_length = int(self.headers.get('Content-Length'))
         post_data = self.rfile.read(content_length)
-        params = urllib.parse.parse_qs(post_data.decode('utf-8'))
+        params = urllib.parse.parse_qs(post_data.decode('utf-8')) 
         
-            # Extraer la base y la altura
+        # Extraer la base y la altura
         base = float(params['base'][0])
         altura = float(params['altura'][0])
         print("------- Contenido del request -------")
 
-        # Enivar la respuesta
+        # Enviar la respuesta
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
         self.end_headers()
