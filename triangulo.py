@@ -1,6 +1,58 @@
 from http.server import HTTPServer , BaseHTTPRequestHandler
 import urllib.parse
 
+html_calc_triangulo = """
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculador de Área de Triángulos</title>
+</head>
+<body>
+    <h1>Calculador de Área de Triángulos</h1>
+
+    <form action="/calcular_area" method="POST"> <label for="base">Base:</label>
+        <input type="number" id="base" name="base" required>
+
+        <label for="altura">Altura:</label>
+        <input type="number" id="altura" name="altura" required>
+
+        <button type="submit">Calcular</button>
+    </form>
+</body>
+</html>
+"""
+
+def area_triangulo(base, altura):
+    """
+    Descripción de la función usada para calcular el área del triángulo: 
+
+    esta función sirve para devolver el resultado del cálculo matemático.     
+
+    Retorna:
+    - el html con un texto que explica la operación y el resultado de la misma. 
+    """
+
+    resultado = base * altura
+    
+    html_area= f"""
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Calculador de Área de Triángulos</title>
+    </head>
+    <body>
+        <h1>Calculador de Área de Triángulos</h1>
+
+        <h3>El área de un triángulo de base {base} y altura {altura} es: {resultado}</h3>
+    </body>
+    </html>
+    """
+    return html_area
+
 
 class GSLPVRequestHandler(BaseHTTPRequestHandler):
 
@@ -64,54 +116,3 @@ def run(server_class=HTTPServer, handler_class=BaseHTTPRequestHandler, puerto=80
 
 run(handler_class = GSLPVRequestHandler, puerto=8025)
 
-html_calc_triangulo = """
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculador de Área de Triángulos</title>
-</head>
-<body>
-    <h1>Calculador de Área de Triángulos</h1>
-
-    <form action="/calcular_area" method="POST"> <label for="base">Base:</label>
-        <input type="number" id="base" name="base" required>
-
-        <label for="altura">Altura:</label>
-        <input type="number" id="altura" name="altura" required>
-
-        <button type="submit">Calcular</button>
-    </form>
-</body>
-</html>
-"""
-
-def area_triangulo(base, altura):
-    """
-    Descripción de la función usada para calcular el área del triángulo: 
-
-    esta función sirve para devolver el resultado del cálculo matemático.     
-
-    Retorna:
-    - el html con un texto que explica la operación y el resultado de la misma. 
-    """
-
-    resultado = base * altura
-    
-    html_area= f"""
-    <!DOCTYPE html>
-    <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Calculador de Área de Triángulos</title>
-    </head>
-    <body>
-        <h1>Calculador de Área de Triángulos</h1>
-
-        <h3>El área de un triángulo de base {base} y altura {altura} es: {resultado}</h3>
-    </body>
-    </html>
-    """
-    return html_area
