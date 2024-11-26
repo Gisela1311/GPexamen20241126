@@ -34,7 +34,7 @@ def area_triangulo(base, altura):
     - el html con un texto que explica la operación y el resultado de la misma. 
     """
 
-    resultado = base * altura
+    resultado = (base * altura)/2
     
     html_area= f"""
     <!DOCTYPE html>
